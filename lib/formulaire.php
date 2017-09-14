@@ -40,6 +40,21 @@ class Formulaire{
 		$composant = "<label>" . $unLabel . "</label>";
 		return $composant;
 	}
+
+	public function creerInputPass($unNom, $unId, $uneValue , $required , $placeholder){
+	    $composant = "<input type = 'password' name = '" . $unNom . "' id = '" . $unId . "' ";
+	    if (!empty($uneValue)){
+	        $composant .= "value = '" . $uneValue . "' ";
+	    }
+	    if (!empty($placeholder)){
+	        $composant .= "placeholder = '" . $placeholder . "' ";
+	    }
+	    if ( $required = 1){
+	        $composant .= "required";
+	    }
+	    $composant .= "/>";
+	    return $composant;
+	}
 	
 	public function creerInputTexte($unNom, $unId, $uneValue , $required , $placeholder){
 		$composant = "<input type = 'text' name = '" . $unNom . "' id = '" . $unId . "' ";

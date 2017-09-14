@@ -18,6 +18,18 @@ else
 	}
 }
 
+$messageErreurConnexion ='';
+
+if(isset($_POST['login'] , $_POST['mdp'])){
+    $unUtilisateur = new Utilisateur($_POST['login'] , $_POST['mdp']);
+    $_SESSION['identification'] = utilisateurDAO::verification($unUtilisateur);
+    if($_SESSION['identification']){
+        $_SESSION['menuPrincipalC']="equipe";
+    }
+    else {
+        $messageErreurConnexion = 'Login ou mot de passe incorrect !';
+    }
+}
 
 $menuPrincipal = new Menu("menuPrincipal");
 
@@ -40,18 +52,7 @@ else{
 }
 
 
-
 include_once dispatcher::dispatch($_SESSION['menuPrincipalC']);
 
-$messageErreurConnexion ='';
-if(isset($_POST['login'] , $_POST['mdp'])){
-    $unUtilisateur = new Utilisateur($_POST['login'] , $_POST['mdp']);
-    $_SESSION['identification'] = utilisateurDAO::verification($unUtilisateur);
-    if($_SESSION['identification']){
-        $_SESSION['menuPrincipalC']="equipe";
-    }
-    else {
-        $messageErreurConnexion = 'Login ou mot de passe incorrect !';
-    }
-}
+
 

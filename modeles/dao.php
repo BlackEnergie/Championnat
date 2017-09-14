@@ -114,6 +114,9 @@ Class utilisateurDAO{
     public static function verification(Utilisateur $utilisateur){
         $sql = "select login from utilisateur where login = '" . $utilisateur->getLogin() . "' and  mdp = md5('" .  $utilisateur->getMdp() ."')";
         $login = DBConnex::getInstance()->queryFetchFirstRow($sql);
+        if(empty($login)){
+            return null;
+        }
         return $login[0];
     }
 }

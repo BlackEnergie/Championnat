@@ -9,7 +9,7 @@ if(!isset($_SESSION['identification']) || !$_SESSION['identification']){
     $formulaireConnexion->ajouterComposantTab();
     
     $formulaireConnexion->ajouterComposantLigne($formulaireConnexion->creerLabelFor('mdp', 'Mot de passe :'), 1);
-    $formulaireConnexion->ajouterComposantLigne($formulaireConnexion->creerInputPass('mdp', 'mdp', '' ,1),1);
+    $formulaireConnexion->ajouterComposantLigne($formulaireConnexion->creerInputPass('mdp', 'mdp', '' ,1, "Password"),1);
     $formulaireConnexion->ajouterComposantTab();
     
     $formulaireConnexion->ajouterComposantLigne($formulaireConnexion-> creerInputSubmit('submitConnex', 'submitConnex', 'Valider'),2);
@@ -24,7 +24,7 @@ if(!isset($_SESSION['identification']) || !$_SESSION['identification']){
     
 }
 else{
-    $_SESSION['identification']=[];
+    $_SESSION['identification']= array();
     $_SESSION['menuPrincipalC']="equipeC";
     header('location: index.php');
     
