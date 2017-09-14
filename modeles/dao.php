@@ -107,10 +107,15 @@ class EquipeDAO{
 		}
 		return $result;
 	}
-	
+}
 
-	
-	
+Class utilisateurDAO{
+    
+    public static function verification(Utilisateur $utilisateur){
+        $sql = "select login from utilisateur where login = '" . $utilisateur->getLogin() . "' and  mdp = md5('" .  $utilisateur->getMdp() ."')";
+        $login = DBConnex::getInstance()->queryFetchFirstRow($sql);
+        return $login[0];
+    }
 }
 
 	

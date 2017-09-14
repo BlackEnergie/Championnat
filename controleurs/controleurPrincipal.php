@@ -18,18 +18,40 @@ else
 	}
 }
 
+
 $menuPrincipal = new Menu("menuPrincipal");
 
-$menuPrincipal->ajouterComposant($menuPrincipal->creerItemImage("equipe",  "images/equipe.png" , "Equipes"));
+
+if(isset($_SESSION['identification']) && $_SESSION['identification']){
+    $menuPrincipal->ajouterComposant($menuPrincipal->creerItemImage("equipe","images/equipe.png" , "Equipes"));
+}else
+{
+    $menuPrincipal->ajouterComposant($menuPrincipal->creerItemImage("equipeC","images/equipe.png" , "Equipes"));
+}
 $menuPrincipal->ajouterComposant($menuPrincipal->creerItemImage("match",  "images/match.png" , "Matchs"));
 $menuPrincipal->ajouterComposant($menuPrincipal->creerItemImage("classement",  "images/classement.png" , "Classement"));
 $menuPrincipal->ajouterComposant($menuPrincipal->creerItemImage("historique",  "images/historique.png" , "Historique"));
 
+if(isset($_SESSION['identification']) && $_SESSION['identification']){
+    $menuPrincipal->ajouterComposant($menuPrincipal->creerItemImage("connexion","images/deconnex.png" , "Déconnexion"));
+}
+else{
+    $menuPrincipal->ajouterComposant($menuPrincipal->creerItemImage("connexion","images/connex.png" , "Connexion"));
+}
+
+
 
 include_once dispatcher::dispatch($_SESSION['menuPrincipalC']);
 
-
-
-
-
+$messageErreurConnexion ='';
+if(isset($_POST['login'] , $_POST['mdp'])){
+    $unUtilisateur = new Utilisateur($_POST['login'] , $_POST['mdp']);
+    $_SESSION['identification'] = utilisateurDAO::verification($unUtilisateur);
+    if($_SESSION['identification']){
+        $_SESSION['menuPrincipalC']="equipe";
+    }
+    else {
+        $messageErreurConnexion = 'Login ou mot de passe incorrect !';
+    }
+}
 
